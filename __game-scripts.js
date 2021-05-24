@@ -387,7 +387,16 @@ Click.prototype.initialize = function() {
             console.log("END");
             this.health = 500;
             this.app.root.findByName('Gameover').enabled = true;
-        }   
+            app.root.findByName('N95Button').enabled = false;
+            app.root.findByName('MedicalButton').enabled = false;
+            app.root.findByName('FFP1Button').enabled = false;
+            app.root.findByName('FilterButton').enabled = false;
+            app.root.findByName('Button_for_tablet').enabled = false;
+            app.root.findByName('task').enabled = false;
+            app.root.findByName('tvendday').enabled = false;
+            app.root.findByName('blackboxend').enabled = true;
+            app.root.findByName('Group').enabled = false;
+        } 
     },this);
 };
 // Click.prototype.onPress = function(event){ //เมื่อคลิก

@@ -1,3 +1,873 @@
-var Follow=pc.createScript("follow");Follow.attributes.add("target",{type:"entity",title:"Target",description:"The Entity to follow"}),Follow.attributes.add("distance",{type:"number",default:4,title:"Distance",description:"How far from the Entity should the follower be"}),Follow.prototype.initialize=function(){this.vec=new pc.Vec3},Follow.prototype.update=function(t){if(this.target){var e=this.target.getPosition();e.x+=.75*this.distance,e.y+=1*this.distance,e.z+=.75*this.distance,this.vec.lerp(this.vec,e,.1),this.entity.setPosition(this.vec)}};var Movement=pc.createScript("movement");Movement.attributes.add("speed",{type:"number",default:.1,min:.05,max:.5,precision:2,description:"Controls the movement speed"}),Movement.prototype.initialize=function(){this.force=new pc.Vec3},Movement.prototype.update=function(e){var t=0,s=0;if(this.app.keyboard.isPressed(pc.KEY_LEFT)&&(t=-this.speed),this.app.keyboard.isPressed(pc.KEY_RIGHT)&&(t+=this.speed),this.app.keyboard.isPressed(pc.KEY_UP)&&(s=-this.speed),this.app.keyboard.isPressed(pc.KEY_DOWN)&&(s+=this.speed),this.force.x=t,this.force.z=s,this.force.length()){var i=Math.cos(.25*-Math.PI),o=Math.sin(.25*-Math.PI);this.force.set(this.force.x*i-this.force.z*o,0,this.force.z*i+this.force.x*o),this.force.length()>this.speed&&this.force.normalize().scale(this.speed)}this.entity.rigidbody.applyImpulse(this.force)};var Teleport=pc.createScript("teleport");Teleport.attributes.add("target",{type:"entity",title:"Target Entity",description:"The target entity where we are going to teleport"}),Teleport.prototype.initialize=function(){this.target&&this.entity.collision.on("triggerenter",this.onTriggerEnter,this)},Teleport.prototype.onTriggerEnter=function(t){t.script.teleportable&&t.script.teleportable.teleport(this.entity,this.target)};var Tablet=pc.createScript("tablet");Tablet.attributes.add("linkto",{type:"entity",description:"The particle effect to trigger when the Tablet is clicked"}),Tablet.prototype.initialize=function(){this.app.mouse.disableContextMenu(),this.app.mouse.on(pc.EVENT_MOUSEDOWN,this.onSelect,this)},Tablet.prototype.update=function(t){},Tablet.prototype.onSelect=function(t){t.button===pc.MOUSEBUTTON_LEFT&&window.open("https://landing-golonai.netlify.app/")};var Teleportable=pc.createScript("teleportable");Teleportable.prototype.initialize=function(){this.lastTeleportFrom=null,this.lastTeleportTo=null,this.lastTeleport=Date.now(),this.startPosition=this.entity.getPosition().clone()},Teleportable.prototype.update=function(t){this.entity.getPosition().y<0&&this.teleport(this.lastTeleportFrom,this.lastTeleportTo)},Teleportable.prototype.teleport=function(t,e){var o;t&&Date.now()-this.lastTeleport<500||(this.lastTeleport=Date.now(),this.lastTeleportFrom=t,this.lastTeleportTo=e,e?(o=e.getPosition()).y+=.5:o=this.startPosition,this.entity.rigidbody.teleport(o),this.entity.rigidbody.linearVelocity=pc.Vec3.ZERO,this.entity.rigidbody.angularVelocity=pc.Vec3.ZERO)};var Television=pc.createScript("television");Television.prototype.initialize=function(){this.entity.element.on("mouseenter",this.onEnter,this),this.entity.element.on("mousedown",this.onPress,this),this.entity.element.on("mouseup",this.onRelease,this),this.entity.element.on("mouseleave",this.onLeave,this),this.entity.element.on("touchstart",this.onPress,this),this.entity.element.on("touchend",this.onRelease,this)},Television.prototype.onPress=function(e){this.app.fire("life",-10)},Television.prototype.update=function(e){};var BtnnewScene=pc.createScript("btnnewScene");BtnnewScene.attributes.add("sceneId",{type:"string",default:"0",title:"Scene ID to load"}),BtnnewScene.prototype.initialize=function(){this.entity.element.on("mouseenter",this.onEnter,this),this.entity.element.on("mousedown",this.onPress,this),this.entity.element.on("mouseup",this.onRelease,this),this.entity.element.on("mouseleave",this.onLeave,this),this.entity.element.on("touchstart",this.onPress,this),this.entity.element.on("touchend",this.onRelease,this)},BtnnewScene.prototype.onPress=function(e){this.app.root.findByName("Root").destroy(),this.loadScene(this.sceneId,(function(){}))},BtnnewScene.prototype.update=function(e){},BtnnewScene.prototype.loadScene=function(e,t){var n=e+".json";this.app.loadSceneHierarchy(n,(function(e,n){e?console.error(e):t(n)}))};var Click=pc.createScript("click");Click.attributes.add("textElement",{type:"entity"}),Click.prototype.initialize=function(){this.app.on("enddaymath",(function(t){this.mask=t}),this),this.app.on("randomseed",(function(t){console.log(t),this.randoms=t}),this),this.Health=1e3,this.mask=0,this.textElement.element.text=1e3,this.app.on("cal",(function(){0===this.randoms&&(console.log("seen 0"),1==this.mask&&(this.Health=this.Health-30),2==this.mask&&(this.Health=this.Health-50),3==this.mask&&(this.Health=this.Health-30),4==this.mask&&(this.Health=this.Health-80)),1===this.randoms&&(console.log("seen 1"),1==this.mask&&(this.Health=this.Health-40),2==this.mask&&(this.Health=this.Health-60),3==this.mask&&(this.Health=this.Health-30),4==this.mask&&(this.Health=this.Health-90)),2===this.randoms&&(console.log("seen 2"),1==this.mask&&(this.Health=this.Health-20),2==this.mask&&(this.Health=this.Health-30),3==this.mask&&(this.Health=this.Health-20),4==this.mask&&(this.Health=this.Health-60)),3===this.randoms&&(console.log("seen 3"),1==this.mask&&(this.Health=this.Health-25),2==this.mask&&(this.Health=this.Health-40),3==this.mask&&(this.Health=this.Health-25),4==this.mask&&(this.Health=this.Health-70)),4===this.randoms&&(console.log("seen 4"),1==this.mask&&(this.Health=this.Health-10),2==this.mask&&(this.Health=this.Health-10),3==this.mask&&(this.Health=this.Health-10),4==this.mask&&(this.Health=this.Health-20)),this.textElement.element.text=this.Health,this.Health<=0&&(this.textElement.element.text=0,console.log("END"),this.health=1e3,this.app.root.findByName("Gameover").enabled=!0)}),this)};var Tutortest=pc.createScript("tutor"),button=Tutortest.attributes.add("input",{type:"string",default:"0",title:"button"});Tutortest.prototype.initialize=function(){this.entity.element.on("mouseenter",this.onEnter,this),this.entity.element.on("mousedown",this.onPress,this),this.entity.element.on("mouseup",this.onRelease,this),this.entity.element.on("mouseleave",this.onLeave,this),this.entity.element.on("touchstart",this.onPress,this),this.entity.element.on("touchend",this.onRelease,this)},Tutortest.prototype.onPress=function(t){t.button===pc.MOUSEBUTTON_LEFT&&this.obj(this.input,(function(){}))},Tutortest.prototype.update=function(t){},Tutortest.prototype.obj=function(t,e){this.app.root.findByName(t).enabled=!1};var Tablettest=pc.createScript("tablettest"),url=Tablettest.attributes.add("urli",{type:"string",default:"0",title:"url"}),url2=Tablettest.attributes.add("urli2",{type:"string",default:"0",title:"url"});Tablettest.prototype.initialize=function(){this.entity.element.on("mousedown",this.onPress,this),this.app.mouse.disableContextMenu()},Tablettest.prototype.onPress=function(t){console.log(t.element.name),t.button===pc.MOUSEBUTTON_LEFT?this.loadweb(this.urli,(function(){})):t.button===pc.MOUSEBUTTON_RIGHT&&this.loadweb(this.urli2,(function(){}))},Tablettest.prototype.update=function(t){},Tablettest.prototype.loadweb=function(t){var e=t;window.open(e)};var TvTest=pc.createScript("tvTest");TvTest.attributes.add("textElement",{type:"entity"}),TvTest.attributes.add("textElement2",{type:"entity"}),TvTest.attributes.add("textElement3",{type:"entity"});var select=0;TvTest.prototype.initialize=function(){this.day=1,this.entity.element.on("mousedown",this.onPress,this)},TvTest.prototype.onPress=function(e){if(this.day=this.day+1,e.button===pc.MOUSEBUTTON_LEFT){var t=this.app;t.fire("cal"),t.fire("masked"),this.app.root.findByName("tvendday").enabled=!1,t.root.findByName("endday").enabled=!1,t.root.findByName("Daygone").enabled=!0,t.root.findByName("blackbox").enabled=!0,t.root.findByName("player").enabled=!1,this.textElement.element.text="day"+this.day,this.textElement2.element.text="day"+this.day,this.textElement3.element.text=this.day-1+" day",setTimeout((function(){t.root.findByName("Daygone").enabled=!1,t.root.findByName("blackbox").enabled=!1,t.root.findByName("player").enabled=!0,t.root.findByName("1").enabled=!1,t.root.findByName("2").enabled=!1,t.root.findByName("3").enabled=!1,t.root.findByName("4").enabled=!1}),1200)}};var Distv=pc.createScript("distv"),button=Distv.attributes.add("input",{type:"string",default:"0",title:"obj"});Distv.prototype.initialize=function(){this.entity.element.on("mousedown",this.onPress,this)},Distv.prototype.onPress=function(t){t.button===pc.MOUSEBUTTON_LEFT&&this.obj(this.input,(function(){}))},Distv.prototype.obj=function(t,i){this.app.root.findByName(t).enabled=!0};var Notv=pc.createScript("notv");Notv.prototype.initialize=function(){this.entity.element.on("mousedown",this.onPress,this)},Notv.prototype.onPress=function(t){t.button===pc.MOUSEBUTTON_LEFT&&(this.app.root.findByName("endday").enabled=!1)};var Mask=pc.createScript("mask");Mask.attributes.add("textElement",{type:"entity"});var select=Mask.attributes.add("mask",{type:"string",default:"0",title:"Choose"});Mask.select=0,Mask.prototype.initialize=function(){this.mask1=10,this.mask2=10,this.mask3=10,this.min1=9,this.min2=9,this.min3=9,this.max1=10,this.max2=10,this.max3=10,this.check=0,this.app.mouse.disableContextMenu(),this.entity.element.on("mousedown",this.onPress,this),this.app.on("masked",(function(){1===this.check&&(this.min1-=1,this.max1-=1,this.app.root.findByName("MedicalButton").enabled=!0,this.app.root.findByName("FFP1Button").enabled=!0,this.app.root.findByName("FilterButton").enabled=!0),2===this.check&&(this.min2-=1,this.max2-=1,this.app.root.findByName("N95Button").enabled=!0,this.app.root.findByName("FFP1Button").enabled=!0,this.app.root.findByName("FilterButton").enabled=!0),3===this.check&&(this.min3-=1,this.max3-=1,this.app.root.findByName("N95Button").enabled=!0,this.app.root.findByName("MedicalButton").enabled=!0,this.app.root.findByName("FilterButton").enabled=!0),4===this.check&&(this.app.root.findByName("N95Button").enabled=!0,this.app.root.findByName("MedicalButton").enabled=!0,this.app.root.findByName("FFP1Button").enabled=!0),this.mask1<=0&&(this.app.root.findByName("N95text").enabled=!1,this.app.root.findByName("N95Button").enabled=!1,this.app.root.findByName("N95").enabled=!1),this.mask2<=0&&(this.app.root.findByName("MedicalMaskText").enabled=!1,this.app.root.findByName("MedicalButton").enabled=!1,this.app.root.findByName("MedicalMask").enabled=!1),this.mask3<=0&&(this.app.root.findByName("FFP1text").enabled=!1,this.app.root.findByName("FFP1Button").enabled=!1,this.app.root.findByName("FFP1").enabled=!1)}),this)},Mask.prototype.onPress=function(t){(t.button===pc.MOUSEBUTTON_LEFT||t.button===pc.MOUSEBUTTON_RIGHT)&&this.select(this.mask,(function(){}))},Mask.prototype.select=function(t){event.button===pc.MOUSEBUTTON_LEFT?(this.app.fire("enddaymath",t),this.app.root.findByName("1").enabled=!1,this.app.root.findByName("2").enabled=!1,this.app.root.findByName("3").enabled=!1,this.app.root.findByName("4").enabled=!1,this.app.root.findByName(t).enabled=!0,this.app.root.findByName("tvendday").enabled=!0,this.mask1>this.min1&&"1"===t&&(this.mask1=this.mask1-1,this.textElement.element.text=this.mask1,this.check=1,this.app.root.findByName("MedicalButton").enabled=!1,this.app.root.findByName("FFP1Button").enabled=!1,this.app.root.findByName("FilterButton").enabled=!1),this.mask2>this.min2&&"2"===t&&(this.mask2=this.mask2-1,this.textElement.element.text=this.mask2,this.check=2,this.app.root.findByName("N95Button").enabled=!1,this.app.root.findByName("FFP1Button").enabled=!1,this.app.root.findByName("FilterButton").enabled=!1),this.mask3>this.min3&&"3"===t&&(this.mask3=this.mask3-1,this.textElement.element.text=this.mask3,this.check=3,this.app.root.findByName("N95Button").enabled=!1,this.app.root.findByName("MedicalButton").enabled=!1,this.app.root.findByName("FilterButton").enabled=!1),"4"===t&&(this.check=4,this.app.root.findByName("N95Button").enabled=!1,this.app.root.findByName("MedicalButton").enabled=!1,this.app.root.findByName("FFP1Button").enabled=!1)):event.button===pc.MOUSEBUTTON_RIGHT&&(this.mask1<this.max1&&"1"===t&&(this.mask1=this.mask1+1,this.textElement.element.text=this.mask1,this.check=0,this.app.root.findByName("MedicalButton").enabled=!0,this.app.root.findByName("FFP1Button").enabled=!0,this.app.root.findByName("FilterButton").enabled=!0),this.mask2<this.max2&&"2"===t&&(this.mask2=this.mask2+1,this.textElement.element.text=this.mask2,this.check=0,this.app.root.findByName("N95Button").enabled=!0,this.app.root.findByName("FFP1Button").enabled=!0,this.app.root.findByName("FilterButton").enabled=!0),this.mask3<this.max3&&"3"===t&&(this.mask3=this.mask3+1,this.textElement.element.text=this.mask3,this.check=0,this.app.root.findByName("N95Button").enabled=!0,this.app.root.findByName("MedicalButton").enabled=!0,this.app.root.findByName("FilterButton").enabled=!0),"4"===t&&(this.check=0,this.app.root.findByName("N95Button").enabled=!0,this.app.root.findByName("MedicalButton").enabled=!0,this.app.root.findByName("FFP1Button").enabled=!0),this.app.root.findByName(t).enabled=!1,this.app.root.findByName("tvendday").enabled=!1)};var Randomevent=pc.createScript("randomevent");Randomevent.prototype.initialize=function(){this.entity.element.on("mousedown",this.onPress,this)},Randomevent.prototype.onPress=function(e){var n=pc.math.roundUp(pc.math.random(0,5),1)-1,o=this.app;o.fire("randomseed",n),console.log(n),0===n&&(o.root.findByName("event0").enabled=!0,o.root.findByName("event1").enabled=!1,o.root.findByName("event2").enabled=!1,o.root.findByName("event3").enabled=!1,o.root.findByName("event4").enabled=!1,o.root.findByName("Boardbutton0").enabled=!0,o.root.findByName("Boardbutton1").enabled=!1,o.root.findByName("Boardbutton2").enabled=!1,o.root.findByName("Boardbutton3").enabled=!1,o.root.findByName("Boardbutton4").enabled=!1),1===n&&(o.root.findByName("event0").enabled=!1,o.root.findByName("event1").enabled=!0,o.root.findByName("event2").enabled=!1,o.root.findByName("event3").enabled=!1,o.root.findByName("event4").enabled=!1,o.root.findByName("Boardbutton0").enabled=!1,o.root.findByName("Boardbutton1").enabled=!0,o.root.findByName("Boardbutton2").enabled=!1,o.root.findByName("Boardbutton3").enabled=!1,o.root.findByName("Boardbutton4").enabled=!1),2===n&&(o.root.findByName("event0").enabled=!1,o.root.findByName("event1").enabled=!1,o.root.findByName("event2").enabled=!0,o.root.findByName("event3").enabled=!1,o.root.findByName("event4").enabled=!1,o.root.findByName("Boardbutton0").enabled=!1,o.root.findByName("Boardbutton1").enabled=!1,o.root.findByName("Boardbutton2").enabled=!0,o.root.findByName("Boardbutton3").enabled=!1,o.root.findByName("Boardbutton4").enabled=!1),3===n&&(o.root.findByName("event0").enabled=!1,o.root.findByName("event1").enabled=!1,o.root.findByName("event2").enabled=!1,o.root.findByName("event3").enabled=!0,o.root.findByName("event4").enabled=!1,o.root.findByName("Boardbutton0").enabled=!1,o.root.findByName("Boardbutton1").enabled=!1,o.root.findByName("Boardbutton2").enabled=!1,o.root.findByName("Boardbutton3").enabled=!0,o.root.findByName("Boardbutton4").enabled=!1),4===n&&(o.root.findByName("event0").enabled=!1,o.root.findByName("event1").enabled=!1,o.root.findByName("event2").enabled=!1,o.root.findByName("event3").enabled=!1,o.root.findByName("event4").enabled=!0,o.root.findByName("Boardbutton0").enabled=!1,o.root.findByName("Boardbutton1").enabled=!1,o.root.findByName("Boardbutton2").enabled=!1,o.root.findByName("Boardbutton3").enabled=!1,o.root.findByName("Boardbutton4").enabled=!0)},Randomevent.prototype.update=function(e){};var UnEnabled=pc.createScript("unEnabled");UnEnabled.prototype.initialize=function(){app=this.app,this.entity.element.on("mousedown",this.onPress,this)},UnEnabled.prototype.onPress=function(){event.button===pc.MOUSEBUTTON_LEFT&&(app.root.findByName("N95Button").enabled=!0,app.root.findByName("MedicalButton").enabled=!0,app.root.findByName("FFP1Button").enabled=!0,app.root.findByName("FilterButton").enabled=!0,app.root.findByName("Button_for_tablet").enabled=!0,app.root.findByName("task").enabled=!0,app.root.findByName("tvendday").enabled=!1)};var Mainmenu=pc.createScript("mainmenu");Mainmenu.attributes.add("sceneId",{type:"string",default:"0",title:"Scene ID to load"}),Mainmenu.prototype.initialize=function(){this.entity.element.on("mouseenter",this.onEnter,this),this.entity.element.on("mousedown",this.onPress,this),this.entity.element.on("mouseup",this.onRelease,this),this.entity.element.on("mouseleave",this.onLeave,this),this.entity.element.on("touchstart",this.onPress,this),this.entity.element.on("touchend",this.onRelease,this)},Mainmenu.prototype.onPress=function(e){window.location.reload()},Mainmenu.prototype.update=function(e){};
+// follow.js
+var Follow = pc.createScript('follow');
 
-//# sourceMappingURL=__game-scripts.js.map
+Follow.attributes.add('target', {
+    type: 'entity',
+    title: 'Target',
+    description: 'The Entity to follow'
+});
+
+Follow.attributes.add('distance', {
+    type: 'number',
+    default: 4,
+    title: 'Distance',
+    description: 'How far from the Entity should the follower be'
+});
+
+// initialize code called once per entity
+Follow.prototype.initialize = function() {
+    this.vec = new pc.Vec3();
+};
+
+// update code called every frame
+Follow.prototype.update = function(dt) {
+    if (!this.target) return;
+
+    // get the position of the target entity
+    var pos = this.target.getPosition();
+
+    // calculate the desired position for this entity
+    pos.x += 0.75 * this.distance;
+    pos.y += 1.0 * this.distance;
+    pos.z += 0.75 * this.distance;
+
+    // smoothly interpolate towards the target position
+    this.vec.lerp(this.vec, pos, 0.1);
+
+    // set the position for this entity
+    this.entity.setPosition(this.vec); 
+};
+
+
+// movement.js
+var Movement = pc.createScript('movement');
+
+Movement.attributes.add('speed', {
+    type: 'number',    
+    default: 0.1,
+    min: 0.05,
+    max: 0.5,
+    precision: 2,
+    description: 'Controls the movement speed'
+});
+
+// initialize code called once per entity
+Movement.prototype.initialize = function() {
+    this.force = new pc.Vec3();
+};
+
+// update code called every frame
+Movement.prototype.update = function(dt) {
+    var forceX = 0;
+    var forceZ = 0;
+
+    // calculate force based on pressed keys
+    if (this.app.keyboard.isPressed(pc.KEY_LEFT)) {
+        forceX = -this.speed;
+    } 
+
+    if (this.app.keyboard.isPressed(pc.KEY_RIGHT)) {
+        forceX += this.speed;
+    }
+
+    if (this.app.keyboard.isPressed(pc.KEY_UP)) {
+        forceZ = -this.speed;
+    } 
+
+    if (this.app.keyboard.isPressed(pc.KEY_DOWN)) {
+        forceZ += this.speed;
+    }
+
+    this.force.x = forceX;
+    this.force.z = forceZ;
+
+    // if we have some non-zero force
+    if (this.force.length()) {
+
+        // calculate force vector
+        var rX = Math.cos(-Math.PI * 0.25);
+        var rY = Math.sin(-Math.PI * 0.25);
+        this.force.set(this.force.x * rX - this.force.z * rY, 0, this.force.z * rX + this.force.x * rY);
+
+        // clamp force to the speed
+        if (this.force.length() > this.speed) {
+            this.force.normalize().scale(this.speed);
+        }
+    }
+
+    // apply impulse to move the entity
+    this.entity.rigidbody.applyImpulse(this.force);
+};
+
+
+// teleport.js
+var Teleport = pc.createScript('teleport');
+
+Teleport.attributes.add('target', {
+    type: 'entity',
+    title: 'Target Entity',
+    description: 'The target entity where we are going to teleport'
+});
+
+// initialize code called once per entity
+Teleport.prototype.initialize = function() {
+    if (this.target) {
+        // Subscribe to the triggerenter event of this entity's collision component.
+        // This will be fired when a rigid body enters this collision volume.
+        this.entity.collision.on('triggerenter', this.onTriggerEnter, this);
+    }
+};
+
+Teleport.prototype.onTriggerEnter = function (otherEntity) {
+    // it is not teleportable
+    if (! otherEntity.script.teleportable)
+        return;
+
+    // teleport entity to the target entity
+    otherEntity.script.teleportable.teleport(this.entity, this.target);
+};
+
+
+// Tablet.js
+var Tablet = pc.createScript('tablet');
+// initialize code called once per entity
+Tablet.attributes.add('linkto', {
+    type: 'entity',
+    description: 'The particle effect to trigger when the Tablet is clicked'
+});
+Tablet.prototype.initialize = function() {
+
+    
+
+    this.app.mouse.disableContextMenu();
+
+
+    this.app.mouse.on(pc.EVENT_MOUSEDOWN, this.onSelect, this);
+    
+};
+
+// update code called every frame
+Tablet.prototype.update = function(dt) {
+    
+};
+
+Tablet.prototype.onSelect = function (event) {
+    // If the left mouse button is pressed, go to landing page
+    
+    if (event.button === pc.MOUSEBUTTON_LEFT) {
+        window.open("https://landing-golonai.netlify.app/");
+    }
+};
+
+// teleportable.js
+var Teleportable = pc.createScript('teleportable');
+
+// initialize code called once per entity
+Teleportable.prototype.initialize = function() {
+    this.lastTeleportFrom = null;
+    this.lastTeleportTo = null;
+    this.lastTeleport = Date.now(); 
+    this.startPosition = this.entity.getPosition().clone();       
+};
+
+// update code called every frame
+Teleportable.prototype.update = function(dt) {
+    // Make sure we don't fall over. If we do then
+    // teleport to the last location
+    var pos = this.entity.getPosition();
+    if (pos.y < 0) {
+        this.teleport(this.lastTeleportFrom, this.lastTeleportTo);
+    }
+};
+
+
+Teleportable.prototype.teleport = function(from, to) {
+    // can't teleport too often (500ms)
+    if (from && (Date.now() - this.lastTeleport) < 500)
+        return;
+
+    // set new teleport time
+    this.lastTeleport = Date.now();
+
+    // set last teleport targets
+    this.lastTeleportFrom = from;
+    this.lastTeleportTo = to;
+
+    // position to teleport to
+    var position;
+
+    if (to) {
+        // from target
+        position = to.getPosition();
+        // move a bit higher
+        position.y += 0.5;
+    } else {
+        // to respawn location
+        position = this.startPosition;
+    }
+
+    // move ball to that point
+    this.entity.rigidbody.teleport(position);
+    // need to reset angular and linear forces
+    this.entity.rigidbody.linearVelocity = pc.Vec3.ZERO;
+    this.entity.rigidbody.angularVelocity = pc.Vec3.ZERO;            
+};
+
+
+// Television.js
+var Television = pc.createScript('television');
+
+// initialize code called once per entity
+Television.prototype.initialize = function() {
+    this.entity.element.on('mouseenter', this.onEnter, this);
+    this.entity.element.on('mousedown', this.onPress, this);
+    this.entity.element.on('mouseup', this.onRelease, this);
+    this.entity.element.on('mouseleave', this.onLeave, this);
+    
+    this.entity.element.on('touchstart', this.onPress, this);
+    this.entity.element.on('touchend', this.onRelease, this);
+};
+Television.prototype.onPress = function(event){
+
+        var test = -10;
+        this.app.fire('life', test);
+
+};
+// update code called every frame
+Television.prototype.update = function(dt) {
+    
+};
+
+
+
+// swap method called for script hot-reloading
+// inherit your script state here
+// Television.prototype.swap = function(old) { };
+
+// to learn more about script anatomy, please read:
+// https://developer.playcanvas.com/en/user-manual/scripting/
+
+// btnnewScene.js
+var BtnnewScene = pc.createScript('btnnewScene');
+
+BtnnewScene.attributes.add("sceneId", {type: "string", default: "0", title: "Scene ID to load"});
+BtnnewScene.prototype.initialize = function(){
+    this.entity.element.on('mouseenter', this.onEnter, this);
+    this.entity.element.on('mousedown', this.onPress, this);
+    this.entity.element.on('mouseup', this.onRelease, this);
+    this.entity.element.on('mouseleave', this.onLeave, this);
+    this.entity.element.on('touchstart', this.onPress, this);
+    this.entity.element.on('touchend', this.onRelease, this);
+};
+
+BtnnewScene.prototype.onPress = function(event){
+    var oldHierarchy = this.app.root.findByName('Root');
+    
+    oldHierarchy.destroy();
+    this.loadScene(this.sceneId, function(){
+        
+    });
+};
+
+BtnnewScene.prototype.update = function(dt){
+    
+};
+
+BtnnewScene.prototype.loadScene = function(id, callback){
+    var url = id + ".json";
+    this.app.loadSceneHierarchy(url, function(err, parent){
+        if(!err){
+            callback(parent);
+        }else{
+            console.error(err);
+        }
+    });
+};
+
+// click.js
+var Click = pc.createScript('click');
+Click.attributes.add('textElement', {type : 'entity' }); //รับ attribute ตรง text เลือด
+
+// initialize code called once per entity
+Click.prototype.initialize = function() {
+    this.app.on('enddaymath', function(select){
+        this.mask = select;
+    },this);
+    this.app.on('randomseed', function(randoms){
+        console.log(randoms);
+        this.randoms = randoms;
+    },this);
+    this.Health = 500; //เลือดเริ่มต้น
+    this.mask = 0;
+    // this.entity.element.on('mousedown', this.onPress, this);
+    this.textElement.element.text = 500;
+    
+    this.app.on('cal',function(){
+        if(this.randoms === 0){
+            console.log('seen 0');
+            if(this.mask == 1){ //N95
+                this.Health = this.Health - 30;  //เลือดลด 10
+            }
+            if(this.mask == 2){ //Medical Mask
+                this.Health = this.Health - 50;  //เลือดลด 10
+            }
+            if(this.mask == 3){ //FFP1
+                this.Health = this.Health - 30;  //เลือดลด 10
+            }
+            if(this.mask == 4){ //No mask
+                this.Health = this.Health - 80;  //เลือดลด 0
+            }
+        }
+        if(this.randoms === 1){
+            console.log('seen 1');
+            if(this.mask == 1){ //N95
+                this.Health = this.Health - 40;  //เลือดลด 10
+            }
+            if(this.mask == 2){ //Medical Mask
+                this.Health = this.Health - 60;  //เลือดลด 10
+            }
+            if(this.mask == 3){ //FFP1
+                this.Health = this.Health - 30;  //เลือดลด 10
+            }
+            if(this.mask == 4){ //No mask
+                this.Health = this.Health - 90;  //เลือดลด 0
+            }
+        }
+        if(this.randoms === 2){
+            console.log('seen 2');
+             if(this.mask == 1){ //N95
+                this.Health = this.Health - 20;  //เลือดลด 10
+            }
+            if(this.mask == 2){ //Medical Mask
+                this.Health = this.Health - 30;  //เลือดลด 10
+            }
+            if(this.mask == 3){ //FFP1
+                this.Health = this.Health - 20;  //เลือดลด 10
+            }
+            if(this.mask == 4){ //No mask
+                this.Health = this.Health - 60;  //เลือดลด 0
+            }
+        }
+        if(this.randoms === 3){
+            console.log('seen 3');
+             if(this.mask == 1){ //N95
+                this.Health = this.Health - 25;  //เลือดลด 10
+            }
+            if(this.mask == 2){ //Medical Mask
+                this.Health = this.Health - 40;  //เลือดลด 10
+            }
+            if(this.mask == 3){ //FFP1
+                this.Health = this.Health - 25;  //เลือดลด 10
+            }
+            if(this.mask == 4){ //No mask
+                this.Health = this.Health - 70;  //เลือดลด 0
+            }
+        }
+        if(this.randoms === 4){
+            console.log('seen 4');
+             if(this.mask == 1){ //N95
+                this.Health = this.Health - 10;  //เลือดลด 10
+            }
+            if(this.mask == 2){ //Medical Mask
+                this.Health = this.Health - 10;  //เลือดลด 10
+            }
+            if(this.mask == 3){ //FFP1
+                this.Health = this.Health - 10;  //เลือดลด 10
+            }
+            if(this.mask == 4){ //No mask
+                this.Health = this.Health - 20;  //เลือดลด 0
+            }
+        }
+        //this.app.root.findByName('stay!').enabled = false;
+
+    
+        this.textElement.element.text = this.Health; //แสดงจำนวนเลือดปัจจุบัน
+        if(this.Health <= 0){
+            this.textElement.element.text = 0;
+            console.log("END");
+            this.health = 500;
+            this.app.root.findByName('Gameover').enabled = true;
+        }   
+    },this);
+};
+// Click.prototype.onPress = function(event){ //เมื่อคลิก
+//     if(this.mask == 1){ //N95
+//             this.Health = this.Health - 10;  //เลือดลด 10
+//     }
+//     if(this.mask == 2){ //Medical Mask
+//             this.Health = this.Health - 10;  //เลือดลด 10
+//     }
+//     if(this.mask == 3){ //FFP1
+//             this.Health = this.Health - 10;  //เลือดลด 10
+//     }
+//     if(this.mask == 4){ //Filter
+//             this.Health = this.Health;  //เลือดลด 0
+//     }
+//     if(this.mask === 0){ //No mask
+//             this.Health = this.Health - 100;  //เลือดลด 0
+//     }
+//    //this.app.root.findByName('stay!').enabled = false;
+
+    
+//     this.textElement.element.text = this.Health; //แสดงจำนวนเลือดปัจจุบัน
+//     if(this.Health <= 0){
+//        this.textElement.element.text = 0;
+//         console.log("END");
+//         this.app.root.findByName('Gameover').enabled = true;
+//     }
+    
+    
+// };
+
+
+// tutor.js
+var Tutortest = pc.createScript('tutor');
+
+var button = Tutortest.attributes.add("input", {type: "string", default: "0", title: "button"});
+Tutortest.prototype.initialize = function() {
+    this.entity.element.on('mouseenter', this.onEnter, this);
+    this.entity.element.on('mousedown', this.onPress, this);
+    this.entity.element.on('mouseup', this.onRelease, this);
+    this.entity.element.on('mouseleave', this.onLeave, this);
+    
+    this.entity.element.on('touchstart', this.onPress, this);
+    this.entity.element.on('touchend', this.onRelease, this);
+};
+
+Tutortest.prototype.onPress = function(event){
+    if(event.button === pc.MOUSEBUTTON_LEFT){
+    this.obj(this.input, function(){
+        
+    });
+    }
+};
+// update code called every frame
+Tutortest.prototype.update = function(dt) {
+    
+};
+
+
+Tutortest.prototype.obj = function(obj, callback){
+    this.app.root.findByName(obj).enabled = false;
+};
+
+
+// tablettest.js
+var Tablettest = pc.createScript('tablettest');
+
+var url = Tablettest.attributes.add('urli',{type:'string', default: "0", title: "url"});
+var url2 = Tablettest.attributes.add('urli2',{type:'string', default: "0", title: "url"});
+
+Tablettest.prototype.initialize = function(){
+    
+    var Entity = this.entity;
+    Entity.element.on('mousedown', this.onPress, this);
+    this.app.mouse.disableContextMenu();
+};
+
+Tablettest.prototype.onPress = function(event){
+    console.log(event.element.name);
+    if(event.button === pc.MOUSEBUTTON_LEFT){
+    this.loadweb(this.urli, function(){
+        
+    });
+    }
+    else if(event.button === pc.MOUSEBUTTON_RIGHT){
+    this.loadweb(this.urli2, function(){
+        
+    });
+    }
+
+};
+
+Tablettest.prototype.update = function(dt){
+    
+};
+
+Tablettest.prototype.loadweb = function(link){
+    var urli = link;
+        window.open(urli);
+};
+
+
+// tv-test.js
+var TvTest = pc.createScript('tvTest');
+TvTest.attributes.add('textElement', {type : 'entity' });
+TvTest.attributes.add('textElement2', {type : 'entity' });
+TvTest.attributes.add('textElement3', {type : 'entity' });
+var select = 0;
+TvTest.prototype.initialize = function() {
+    this.day = 1;
+    this.entity.element.on('mousedown', this.onPress, this);
+//     this.app.on('life', function(select){
+//         console.log("mask:");
+//         console.log(select);
+//         // this.app.fire('enddaymath',select);
+//     },this);
+};
+
+TvTest.prototype.onPress = function(event){
+    this.day = this.day + 1;
+    if(event.button === pc.MOUSEBUTTON_LEFT){
+        var app = this.app;
+        app.fire('cal');
+        app.fire('masked');
+        this.app.root.findByName('tvendday').enabled = false;
+        app.root.findByName('endday').enabled = false;
+        app.root.findByName('Daygone').enabled = true;
+        app.root.findByName('blackbox').enabled = true;
+        app.root.findByName('player').enabled = false;
+        this.textElement.element.text = "day"+this.day;
+        this.textElement2.element.text = "day"+this.day;
+        this.textElement3.element.text = this.day - 1 + " " + "day";
+        setTimeout(function() {
+            //app.fire('');
+            app.root.findByName('Daygone').enabled = false;
+            app.root.findByName('blackbox').enabled = false;
+            app.root.findByName('player').enabled = true;
+            app.root.findByName('1').enabled = false;
+            app.root.findByName('2').enabled = false;
+            app.root.findByName('3').enabled = false;
+            app.root.findByName('4').enabled = false;
+        }, 1200);
+    }
+};
+
+// TvTest.prototype.onMath = function(select){
+//     console.log(select);
+// };
+
+
+
+// distv.js
+var Distv = pc.createScript('distv');
+var button = Distv.attributes.add("input", {type: "string", default: "0", title: "obj"});
+// initialize code called once per entity
+Distv.prototype.initialize = function() {
+    this.entity.element.on('mousedown', this.onPress, this);
+};
+
+Distv.prototype.onPress = function(event){
+    if(event.button === pc.MOUSEBUTTON_LEFT){
+        this.obj(this.input, function(){
+        
+    });
+    }
+};
+
+Distv.prototype.obj = function(obj, callback){
+    this.app.root.findByName(obj).enabled = true;
+};
+
+
+
+// notv.js
+var Notv = pc.createScript('notv');
+
+// initialize code called once per entity
+Notv.prototype.initialize = function() {
+    this.entity.element.on('mousedown', this.onPress, this);
+};
+
+Notv.prototype.onPress = function(event){
+    if(event.button === pc.MOUSEBUTTON_LEFT){
+        this.app.root.findByName('endday').enabled = false;
+    }
+};
+
+
+// Mask.js
+var Mask = pc.createScript('mask');
+Mask.attributes.add('textElement', {type : 'entity' });
+var select = Mask.attributes.add('mask',{type:'string', default: "0", title: "Choose"});
+Mask.select = 0;
+
+Mask.prototype.initialize = function(){
+    this.mask1 = 10;
+    this.mask2 = 10;
+    this.mask3 = 10;
+    this.min1 = 9;
+    this.min2 = 9;
+    this.min3 = 9;
+    this.max1 = 10;
+    this.max2 = 10;
+    this.max3 = 10;
+    this.check = 0;
+    this.app.mouse.disableContextMenu();
+    var Entity = this.entity;
+    Entity.element.on('mousedown', this.onPress, this);
+    this.app.on('masked', function(){
+        if(this.check === 1){
+            this.min1 -= 1;
+            this.max1 -= 1;
+            this.app.root.findByName('MedicalButton').enabled = true;
+            this.app.root.findByName('FFP1Button').enabled = true;
+            this.app.root.findByName('FilterButton').enabled = true;
+        }
+        if(this.check === 2){
+            this.min2 -= 1;
+            this.max2 -= 1;
+            this.app.root.findByName('N95Button').enabled = true;
+            this.app.root.findByName('FFP1Button').enabled = true;
+            this.app.root.findByName('FilterButton').enabled = true;
+        }
+        if(this.check === 3){
+            this.min3 -= 1;
+            this.max3 -= 1;
+            this.app.root.findByName('N95Button').enabled = true;
+            this.app.root.findByName('MedicalButton').enabled = true;
+            this.app.root.findByName('FilterButton').enabled = true;
+        }
+        if(this.check === 4){
+            this.app.root.findByName('N95Button').enabled = true;
+            this.app.root.findByName('MedicalButton').enabled = true;
+            this.app.root.findByName('FFP1Button').enabled = true;
+        }
+        if(this.mask1 <= 0){
+            this.app.root.findByName('N95text').enabled = false;
+            this.app.root.findByName('N95Button').enabled = false;
+            this.app.root.findByName('N95').enabled = false;
+        }
+        if(this.mask2 <= 0){
+            this.app.root.findByName('MedicalMaskText').enabled = false;
+            this.app.root.findByName('MedicalButton').enabled = false;
+            this.app.root.findByName('MedicalMask').enabled = false;
+        }
+        if(this.mask3 <= 0){
+            this.app.root.findByName('FFP1text').enabled = false;
+            this.app.root.findByName('FFP1Button').enabled = false;
+            this.app.root.findByName('FFP1').enabled = false;
+        }
+    },this);
+};
+
+Mask.prototype.onPress = function(event){
+    if(event.button === pc.MOUSEBUTTON_LEFT){
+        this.select(this.mask, function(){
+        
+    });
+    }
+    else if(event.button === pc.MOUSEBUTTON_RIGHT){
+        this.select(this.mask, function(){
+        
+    });
+    }
+};
+
+Mask.prototype.select = function(select){
+    if(event.button === pc.MOUSEBUTTON_LEFT){
+        // this.app.fire('life', select);
+        this.app.fire('enddaymath',select);
+        this.app.root.findByName('1').enabled = false;
+        this.app.root.findByName('2').enabled = false;
+        this.app.root.findByName('3').enabled = false;
+        this.app.root.findByName('4').enabled = false;
+        this.app.root.findByName(select).enabled = true;
+        this.app.root.findByName('tvendday').enabled = true;
+        if(this.mask1 > this.min1){
+            if(select === '1'){
+                this.mask1 = this.mask1 - 1;
+                this.textElement.element.text = this.mask1;
+                this.check = 1;
+                this.app.root.findByName('MedicalButton').enabled = false;
+                this.app.root.findByName('FFP1Button').enabled = false;
+                this.app.root.findByName('FilterButton').enabled = false;
+            }
+        }
+        if(this.mask2 > this.min2){
+            if(select ==='2'){
+                this.mask2 = this.mask2 - 1;
+                this.textElement.element.text = this.mask2;
+                this.check = 2;
+                this.app.root.findByName('N95Button').enabled = false;
+                this.app.root.findByName('FFP1Button').enabled = false;
+                this.app.root.findByName('FilterButton').enabled = false;
+            }
+        }
+        if(this.mask3 > this.min3){
+            if(select === '3'){
+                this.mask3 = this.mask3 - 1;
+                this.textElement.element.text = this.mask3;
+                this.check = 3;
+                this.app.root.findByName('N95Button').enabled = false;
+                this.app.root.findByName('MedicalButton').enabled = false;
+                this.app.root.findByName('FilterButton').enabled = false;
+            }
+        }
+        if(select === '4'){
+            this.check = 4;
+            this.app.root.findByName('N95Button').enabled = false;
+            this.app.root.findByName('MedicalButton').enabled = false;
+            this.app.root.findByName('FFP1Button').enabled = false;
+        }
+    }
+    else if(event.button === pc.MOUSEBUTTON_RIGHT){ // 10 -> 9 -> 10 9+1 = 10
+        if(this.mask1 < this.max1){
+            if(select === '1'){
+                this.mask1 = this.mask1 + 1;
+                this.textElement.element.text = this.mask1;
+                this.check = 0;
+                this.app.root.findByName('MedicalButton').enabled = true;
+                this.app.root.findByName('FFP1Button').enabled = true;
+                this.app.root.findByName('FilterButton').enabled = true;
+            }
+        }
+        if(this.mask2 < this.max2){
+            if(select === '2'){
+                this.mask2 = this.mask2 + 1;
+                this.textElement.element.text = this.mask2;
+                this.check = 0;
+                this.app.root.findByName('N95Button').enabled = true;
+                this.app.root.findByName('FFP1Button').enabled = true;
+                this.app.root.findByName('FilterButton').enabled = true;
+            }
+        }
+        if(this.mask3 < this.max3){
+            if(select === '3'){
+                this.mask3 = this.mask3 + 1;
+                this.textElement.element.text = this.mask3;
+                this.check = 0;
+                this.app.root.findByName('N95Button').enabled = true;
+                this.app.root.findByName('MedicalButton').enabled = true;
+                this.app.root.findByName('FilterButton').enabled = true;
+            }
+        }
+        if(select === '4'){
+            this.check = 0;
+            this.app.root.findByName('N95Button').enabled = true;
+            this.app.root.findByName('MedicalButton').enabled = true;
+            this.app.root.findByName('FFP1Button').enabled = true;
+        }
+        this.app.root.findByName(select).enabled = false;
+        this.app.root.findByName('tvendday').enabled = false;
+    }
+};
+
+
+// randomevent.js
+var Randomevent = pc.createScript('randomevent');
+// initialize code called once per entity
+Randomevent.prototype.initialize = function() {
+    this.entity.element.on('mousedown', this.onPress, this);
+};
+
+
+Randomevent.prototype.onPress = function(event){
+    var random = pc.math.roundUp(pc.math.random(0,5),1)-1;
+    var app = this.app;
+    app.fire('randomseed',random);
+    console.log(random);
+    if(random === 0){
+        app.root.findByName('event0').enabled = true;
+        app.root.findByName('event1').enabled = false;
+        app.root.findByName('event2').enabled = false;
+        app.root.findByName('event3').enabled = false;
+        app.root.findByName('event4').enabled = false;
+        app.root.findByName('Boardbutton0').enabled = true;
+        app.root.findByName('Boardbutton1').enabled = false;
+        app.root.findByName('Boardbutton2').enabled = false;
+        app.root.findByName('Boardbutton3').enabled = false;
+        app.root.findByName('Boardbutton4').enabled = false;
+    }
+    if(random === 1){
+        app.root.findByName('event0').enabled = false;
+        app.root.findByName('event1').enabled = true;
+        app.root.findByName('event2').enabled = false;
+        app.root.findByName('event3').enabled = false;
+        app.root.findByName('event4').enabled = false;
+        app.root.findByName('Boardbutton0').enabled = false;
+        app.root.findByName('Boardbutton1').enabled = true;
+        app.root.findByName('Boardbutton2').enabled = false;
+        app.root.findByName('Boardbutton3').enabled = false;
+        app.root.findByName('Boardbutton4').enabled = false;
+    }
+    if (random === 2){
+        app.root.findByName('event0').enabled = false;
+        app.root.findByName('event1').enabled = false;
+        app.root.findByName('event2').enabled = true;
+        app.root.findByName('event3').enabled = false;
+        app.root.findByName('event4').enabled = false;
+        app.root.findByName('Boardbutton0').enabled = false;
+        app.root.findByName('Boardbutton1').enabled = false;
+        app.root.findByName('Boardbutton2').enabled = true;
+        app.root.findByName('Boardbutton3').enabled = false;
+        app.root.findByName('Boardbutton4').enabled = false;
+    }
+    if (random === 3){
+        app.root.findByName('event0').enabled = false;
+        app.root.findByName('event1').enabled = false;
+        app.root.findByName('event2').enabled = false;
+        app.root.findByName('event3').enabled = true;
+        app.root.findByName('event4').enabled = false;
+        app.root.findByName('Boardbutton0').enabled = false;
+        app.root.findByName('Boardbutton1').enabled = false;
+        app.root.findByName('Boardbutton2').enabled = false;
+        app.root.findByName('Boardbutton3').enabled = true;
+        app.root.findByName('Boardbutton4').enabled = false;
+    }
+    if (random === 4){
+        app.root.findByName('event0').enabled = false;
+        app.root.findByName('event1').enabled = false;
+        app.root.findByName('event2').enabled = false;
+        app.root.findByName('event3').enabled = false;
+        app.root.findByName('event4').enabled = true;
+        app.root.findByName('Boardbutton0').enabled = false;
+        app.root.findByName('Boardbutton1').enabled = false;
+        app.root.findByName('Boardbutton2').enabled = false;
+        app.root.findByName('Boardbutton3').enabled = false;
+        app.root.findByName('Boardbutton4').enabled = true;
+    }
+
+};
+
+
+// update code called every frame
+Randomevent.prototype.update = function(dt) {
+    
+};
+
+
+// un-enabled.js
+var UnEnabled = pc.createScript('unEnabled');
+
+// initialize code called once per entity
+UnEnabled.prototype.initialize = function() {
+    app = this.app;
+    this.entity.element.on('mousedown', this.onPress, this);
+};
+
+UnEnabled.prototype.onPress = function() {
+    if(event.button === pc.MOUSEBUTTON_LEFT){
+        app.root.findByName('N95Button').enabled = true;
+        app.root.findByName('MedicalButton').enabled = true;
+        app.root.findByName('FFP1Button').enabled = true;
+        app.root.findByName('FilterButton').enabled = true;
+        app.root.findByName('Button_for_tablet').enabled = true;
+        app.root.findByName('task').enabled = true;
+        app.root.findByName('tvendday').enabled = false;
+    }
+};
+
+// mainmenu.js
+var Mainmenu = pc.createScript('mainmenu');
+
+Mainmenu.attributes.add("sceneId", {type: "string", default: "0", title: "Scene ID to load"});
+Mainmenu.prototype.initialize = function(){
+    this.entity.element.on('mouseenter', this.onEnter, this);
+    this.entity.element.on('mousedown', this.onPress, this);
+    this.entity.element.on('mouseup', this.onRelease, this);
+    this.entity.element.on('mouseleave', this.onLeave, this);
+    this.entity.element.on('touchstart', this.onPress, this);
+    this.entity.element.on('touchend', this.onRelease, this);
+};
+
+Mainmenu.prototype.onPress = function(event){
+    window.location.reload();
+    
+};
+
+Mainmenu.prototype.update = function(dt){
+    
+};
+
+

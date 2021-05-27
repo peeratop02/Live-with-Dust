@@ -1434,127 +1434,7 @@ cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
   background-image:linear-gradient(#cab5f0,#689de1,#689de1,#e3f9fd);
   position: relative;
   overflow: hidden;
-}
-@keyframes color {
-        0% {
-            background-color: #14c7de;
-        }
-
-        5% {
-            background-color: rgb(54, 204, 209);
-        }
-
-        10% {
-            background-color: rgb(53, 162, 235);
-        }
-
-        15% {
-            background-color: rgb(15, 96, 218);
-        }
-
-        20% {
-            background-color: rgb(42, 103, 196);
-        }
-
-        25% {
-            background-color: rgb(53, 162, 235);
-        }
-
-        30% {
-            background-color: rgb(54, 204, 209);
-        }
-    }
-
-    @keyframes color1 {
-        0% {
-            background-color: #19b092;
-        }
-
-        5% {
-            background-color: rgb(8, 243, 165);
-        }
-
-        10% {
-            background-color: rgb(9, 136, 115);
-        }
-
-        15% {
-            background-color: rgb(14, 161, 137);
-        }
-
-        20% {
-            background-color: rgb(9, 136, 115);
-        }
-
-        25% {
-            background-color: rgb(8, 243, 165);
-        }
-
-        30% {
-            background-color: #19b092;
-        }
-    }
-
-    @keyframes color2 {
-        0% {
-            background-color: #e79278;
-        }
-
-        5% {
-            background-color: rgb(228, 112, 35);
-        }
-
-        10% {
-            background-color: rgb(212, 77, 14);
-        }
-
-        15% {
-            background-color: rgb(223, 70, 43);
-        }
-
-        20% {
-            background-color: rgb(212, 77, 14);
-        }
-
-        25% {
-            background-color: rgb(228, 112, 35);
-        }
-
-        30% {
-            background-color: #e79278;
-        }
-    }
-
-    @keyframes color3 {
-        0% {
-            background-color: #C7EA46;
-        }
-
-        5% {
-            background-color: rgb(243, 239, 26);
-        }
-
-        10% {
-            background-color: rgb(158, 156, 40);
-        }
-
-        15% {
-            background-color: rgb(185, 197, 10);
-        }
-
-        20% {
-            background-color: rgb(199, 196, 38);
-        }
-
-        25% {
-            background-color: rgb(243, 239, 26);
-        }
-
-        30% {
-            background-color: #C7EA46;
-        }
-    }
-
+}   
 .pic{
   display: flex;
   justify-content: center;
@@ -1669,7 +1549,7 @@ cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
 .context{
   top:-7.5%;
   left: 30%;
-  color: #eee;
+  color: #000;
   font-size: 1.1vw;
   font-weight: 900;
   text-align: center;
@@ -1677,11 +1557,11 @@ cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
 .context1{
   top:5%;
   right: 13%;
-  color: #eee;
+  color: #000;
   font-size: 1.1vw;
   font-weight: 900;
   text-align: center;
-  border: 5px solid rgb(255, 252, 252);
+  border: 5px solid rgb(19, 18, 18);
   height: 15%;
   width: 55%;
   padding: 10px;
@@ -1690,7 +1570,7 @@ cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
 .context2{
   top:-7.5%;
   left: 63%;
-  color: #eee;
+  color: #000;
   font-size: 1.1vw;
   font-weight: 900;
   text-align: center;
@@ -1698,7 +1578,7 @@ cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
 .context3{
   top:4%;
   right: 13%;
-  color: #eee;
+  color: #000;
   font-size: 1.1vw;
   font-weight: 200;
   text-align: center;
@@ -1791,9 +1671,6 @@ cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
         background: #14c7de;
         left: 38%;
         z-index: 100;
-        animation-name: color;
-        animation-duration: 50s;
-        animation-iteration-count: infinite;
     }
 
     #line1 {
@@ -1803,9 +1680,6 @@ cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
         background: #19b092;
         left: 50%;
         z-index: 100;
-        animation-name: color1;
-        animation-duration: 50s;
-        animation-iteration-count: infinite;
     }
 
     #line2 {
@@ -1815,9 +1689,6 @@ cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
         background: #ef5f33;
         left: 62%;
         z-index: 100;
-        animation-name: color2;
-        animation-duration: 50s;
-        animation-iteration-count: infinite;
     }
 
     #line3 {
@@ -1827,9 +1698,6 @@ cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
         background: #C7EA46;
         left: 74%;
         z-index: 100;
-        animation-name: color3;
-        animation-duration: 50s;
-        animation-iteration-count: infinite;
     }
 
 .image1 {
@@ -2039,6 +1907,44 @@ p {
   background-color: rgb(73, 170, 86);
   cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
 }
+
+
+#thai1{
+  font-size: 1.2vw;
+  position: absolute;
+  top: 71.5%;
+  left: 28.8%;
+  color: white;
+  font-weight: bolder;
+  z-index: 10;
+}
+#thai2{
+  font-size: 1.2vw;
+  position: absolute;
+  top: 71.5%;
+  right: 13.5%;
+  color: white;
+  font-weight: bolder;
+  z-index: 10;
+}
+#who1{
+  font-size: 1.2vw;
+  position: absolute;
+  top: 71.5%;
+  left: 10.5%;
+  color: white;
+  font-weight: bolder;
+  z-index: 10;
+}
+#who2{
+  font-size: 1.2vw;
+  position: absolute;
+  top: 71.5%;
+  right: 25%;
+  color: white;
+  font-weight: bolder;
+  z-index: 10;
+}
 #orage {
   border-radius: 15%;
   background: #f46d0a;
@@ -2052,8 +1958,8 @@ p {
   border-radius: 15%;
   background: #aeb42b;
   position: absolute;
-  top: 1%;
-  right: 22.5%;
+  top: 6%;
+  right: 25%;
   width: 2%;
   height: 4%;
 }
@@ -2061,8 +1967,8 @@ p {
   border-radius: 15%;
   background: #ffb300;
   position: absolute;
-  top: 6%;
-  right: 25%;
+  top: 1%;
+  right: 22.5%;
   width: 2%;
   height: 4%;
 }
@@ -2087,7 +1993,7 @@ p {
   font-size: 1.1vw;
   position: absolute;
   top: 8%;
-  right: 15.1%;
+  right: 15.3%;
   color: #fff;
   font-weight: bolder;
 }

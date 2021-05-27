@@ -11,7 +11,6 @@
   src: url(FC-Minimal/FC_Minimal_Regular.ttf);
 
 }
-
 *{
   font-family: 'Sarabun', sans-serif;
 
@@ -341,8 +340,8 @@ nav#dot-nav.red a:first-child {
   flex-direction: row;
   z-index: 999;
 	position: relative;
-	padding: 1rem 3rem;
-	font-size: 1rem;
+	padding: 1rem 2em;
+	font-size: 1.3rem;
 	color: var(--inv);
 	letter-spacing: 0.3rem;
 	text-transform: uppercase;

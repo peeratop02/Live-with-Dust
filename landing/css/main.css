@@ -1450,16 +1450,17 @@ cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
   background-size: contain;
 }
 .p1 {
-  
-  font-size: 1.7vw;
-  color:#fff;
-  font-family: 'Mitr', sans-serif;
-}
-.p2 {
-  
-  font-size: 2vw;
-  color:#000;
-}
+
+        font-size: 1.7vw;
+        color: #fff;
+        font-family: 'Mitr', sans-serif;
+    }
+
+    .p2 {
+
+        font-size: 2vw;
+        color: #000;
+    }
 .pot{
   width: 15%;
   height: 25%;

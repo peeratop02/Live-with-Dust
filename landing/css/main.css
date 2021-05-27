@@ -1907,6 +1907,44 @@ p {
   background-color: rgb(73, 170, 86);
   cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
 }
+
+
+#thai1{
+  font-size: 1.2vw;
+  position: absolute;
+  top: 71.5%;
+  left: 28.8%;
+  color: white;
+  font-weight: bolder;
+  z-index: 10;
+}
+#thai2{
+  font-size: 1.2vw;
+  position: absolute;
+  top: 71.5%;
+  right: 13.5%;
+  color: white;
+  font-weight: bolder;
+  z-index: 10;
+}
+#who1{
+  font-size: 1.2vw;
+  position: absolute;
+  top: 71.5%;
+  left: 10.5%;
+  color: white;
+  font-weight: bolder;
+  z-index: 10;
+}
+#who2{
+  font-size: 1.2vw;
+  position: absolute;
+  top: 71.5%;
+  right: 25%;
+  color: white;
+  font-weight: bolder;
+  z-index: 10;
+}
 #orage {
   border-radius: 15%;
   background: #f46d0a;
@@ -1920,8 +1958,8 @@ p {
   border-radius: 15%;
   background: #aeb42b;
   position: absolute;
-  top: 1%;
-  right: 22.5%;
+  top: 6%;
+  right: 25%;
   width: 2%;
   height: 4%;
 }
@@ -1929,8 +1967,8 @@ p {
   border-radius: 15%;
   background: #ffb300;
   position: absolute;
-  top: 6%;
-  right: 25%;
+  top: 1%;
+  right: 22.5%;
   width: 2%;
   height: 4%;
 }
@@ -1955,7 +1993,7 @@ p {
   font-size: 1.1vw;
   position: absolute;
   top: 8%;
-  right: 15.1%;
+  right: 15.3%;
   color: #fff;
   font-weight: bolder;
 }

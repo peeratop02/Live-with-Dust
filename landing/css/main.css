@@ -310,6 +310,13 @@ nav#dot-nav.red a:first-child {
 
 /* section button */
 
+.footer {
+  z-index: 100;
+  width: 100vw;
+  height: 50vw;
+  border: 1px solid black;
+}
+
 .img-joy {
   float: right;
   margin: auto;
@@ -328,6 +335,7 @@ nav#dot-nav.red a:first-child {
 }
 
 .buttons {
+  z-index: 999;
   position: absolute;
   right: 10px;
   bottom: 15px;
@@ -1450,17 +1458,16 @@ cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
   background-size: contain;
 }
 .p1 {
-
-        font-size: 1.7vw;
-        color: #fff;
-        font-family: 'Mitr', sans-serif;
-    }
-
-    .p2 {
-
-        font-size: 2vw;
-        color: #000;
-    }
+  
+  font-size: 2vw;
+  color:#fff;
+  font-family: 'Mitr', sans-serif;
+}
+.p2 {
+  
+  font-size: 2vw;
+  color:#000;
+}
 .pot{
   width: 15%;
   height: 25%;
@@ -2737,7 +2744,7 @@ cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
   position: absolute;
   border-radius: 30px;
   top: 9%;
-  left:20%;
+  left:10%;
   font-size: 2vw;
   font-weight: bold;
   color: rgb(34, 34, 34);
@@ -2757,11 +2764,12 @@ cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
 }
 .passage2{
   position:absolute;
-  top:71%;
-  left: 31%;
+  top:66.5%;
+  left: 21%;
   text-align: center;
   padding:0.5em;
    width: 7em;
+  margin-top: 1rem;
   border-radius: 10px;
   background: #194a72;
   border: none;

@@ -1,7 +1,6 @@
 var isMobile =
   Math.min(window.screen.width, window.screen.height) < 768 ||
   navigator.userAgent.indexOf("Mobi") > -1;
-console.log(isMobile);
 if (isMobile) {
   document.body.innerHTML = "";
   document.body.innerHTML = `<div class="modal">
@@ -126,7 +125,6 @@ const dotNav = (elem, easing) => {
     //  click stuff
 
     const scrollMe = (e) => {
-        console.log(e)
         let anchor = e.currentTarget.dataset.sec;
         scrollIt(document.querySelector('.section-' + anchor), scrollSpeed, easing);
         e.preventDefault();
@@ -134,7 +132,6 @@ const dotNav = (elem, easing) => {
 
     allDots = document.getElementsByClassName('dots');
     for (let i = 0; i < allDots.length; i++) {
-        console.log(allDots[i])
         allDots[i].addEventListener('click', scrollMe);
     }
 }
@@ -162,8 +159,6 @@ function showDivs(n) {
 }
 
 window.onscroll = function () {
-    console.log(document.body.scrollTop)
-    console.log(document.documentElement.scrollTop)
     scrollFunction()
     scrollFunction2()
     scrollGraph()

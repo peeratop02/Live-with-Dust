@@ -2734,16 +2734,18 @@ cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
 }
 #textt2{
   position: absolute;
+  border-radius: 30px;
   top: 9%;
   left:20%;
   font-size: 2vw;
   font-weight: bold;
-  color: rgb(58, 49, 49);
+  color: rgb(34, 34, 34);
   text-align: center;
-  border: 5px solid white;
+  background-color: rgb(240, 240, 240);
+  border: 5px solid rgb(99, 98, 98);
   padding: 25px;
-  padding-bottom: 40px;
-  opacity: 80%;
+  padding-bottom: 30px;
+  opacity: 85%;
   z-index: 100;
   font-family: 'Mitr', sans-serif;
 }
@@ -2754,8 +2756,8 @@ cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
 }
 .passage2{
   position:absolute;
-  top:70%;
-  left: 29.7%;
+  top:71%;
+  left: 31%;
   text-align: center;
   padding:0.5em;
    width: 7em;

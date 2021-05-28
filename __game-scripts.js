@@ -287,9 +287,10 @@ BtnnewScene.prototype.loadScene = function(id, callback){
 // click.js
 var Click = pc.createScript('click');
 Click.attributes.add('textElement', {type : 'entity' }); //รับ attribute ตรง text เลือด
-
 // initialize code called once per entity
 Click.prototype.initialize = function() {
+    this.Health = 500; //เลือดเริ่มต้น
+    this.mask = 0;
     this.app.on('enddaymath', function(select){
         this.mask = select;
     },this);
@@ -297,92 +298,96 @@ Click.prototype.initialize = function() {
         console.log(randoms);
         this.randoms = randoms;
     },this);
-    this.Health = 500; //เลือดเริ่มต้น
-    this.mask = 0;
     // this.entity.element.on('mousedown', this.onPress, this);
     this.textElement.element.text = 500;
     
     this.app.on('cal',function(){
-        if(this.randoms === 0){
-            console.log('seen 0');
-            if(this.mask == 1){ //N95
-                this.Health = this.Health - 30;  //เลือดลด 10
+            if(this.randoms === 0){
+                console.log('seen 0');
+                if(this.mask == 1){ //N95
+                    this.Health = this.Health - 30;  //เลือดลด 10
+                }
+                if(this.mask == 2){ //Medical Mask
+                    this.Health = this.Health - 50;  //เลือดลด 10
+                }
+                if(this.mask == 3){ //FFP1
+                    this.Health = this.Health - 30;  //เลือดลด 10
+                }
+                if(this.mask == 4){ //No mask
+                    this.Health = this.Health - 80;  //เลือดลด 0
+                }
             }
-            if(this.mask == 2){ //Medical Mask
-                this.Health = this.Health - 50;  //เลือดลด 10
+            if(this.randoms === 1){
+                console.log('seen 1');
+                if(this.mask == 1){ //N95
+                    this.Health = this.Health - 40;  //เลือดลด 10
+                }
+                if(this.mask == 2){ //Medical Mask
+                    this.Health = this.Health - 60;  //เลือดลด 10
+                }
+                if(this.mask == 3){ //FFP1
+                    this.Health = this.Health - 30;  //เลือดลด 10
+                }
+                if(this.mask == 4){ //No mask
+                    this.Health = this.Health - 90;  //เลือดลด 0
+                }
             }
-            if(this.mask == 3){ //FFP1
-                this.Health = this.Health - 30;  //เลือดลด 10
+            if(this.randoms === 2){
+                console.log('seen 2');
+                 if(this.mask == 1){ //N95
+                    this.Health = this.Health - 20;  //เลือดลด 10
+
+                }
+                if(this.mask == 2){ //Medical Mask
+                    this.Health = this.Health - 30;  //เลือดลด 10
+                }
+                if(this.mask == 3){ //FFP1
+                    this.Health = this.Health - 20;  //เลือดลด 10
+                }
+                if(this.mask == 4){ //No mask
+                    this.Health = this.Health - 60;  //เลือดลด 0
+                }
             }
-            if(this.mask == 4){ //No mask
-                this.Health = this.Health - 80;  //เลือดลด 0
+            if(this.randoms === 3){
+                console.log('seen 3');
+                 if(this.mask == 1){ //N95
+                    this.Health = this.Health - 25;  //เลือดลด 10
+
+                }
+                if(this.mask == 2){ //Medical Mask
+                    this.Health = this.Health - 40;  //เลือดลด 10
+                }
+                if(this.mask == 3){ //FFP1
+                    this.Health = this.Health - 25;  //เลือดลด 10
+                }
+                if(this.mask == 4){ //No mask
+                    this.Health = this.Health - 70;  //เลือดลด 0
+                }
             }
-        }
-        if(this.randoms === 1){
-            console.log('seen 1');
-            if(this.mask == 1){ //N95
-                this.Health = this.Health - 40;  //เลือดลด 10
+            if(this.randoms === 4){
+                console.log('seen 4');
+                 if(this.mask == 1){ //N95
+                    this.Health = this.Health - 10;  //เลือดลด 10
+
+                }
+                if(this.mask == 2){ //Medical Mask
+                    this.Health = this.Health - 10;  //เลือดลด 10
+                }
+                if(this.mask == 3){ //FFP1
+                    this.Health = this.Health - 10;  //เลือดลด 10
+                }
+                if(this.mask == 4){ //No mask
+                    this.Health = this.Health - 20;  //เลือดลด 0
+                }
             }
-            if(this.mask == 2){ //Medical Mask
-                this.Health = this.Health - 60;  //เลือดลด 10
-            }
-            if(this.mask == 3){ //FFP1
-                this.Health = this.Health - 30;  //เลือดลด 10
-            }
-            if(this.mask == 4){ //No mask
-                this.Health = this.Health - 90;  //เลือดลด 0
-            }
-        }
-        if(this.randoms === 2){
-            console.log('seen 2');
-             if(this.mask == 1){ //N95
-                this.Health = this.Health - 20;  //เลือดลด 10
-            }
-            if(this.mask == 2){ //Medical Mask
-                this.Health = this.Health - 30;  //เลือดลด 10
-            }
-            if(this.mask == 3){ //FFP1
-                this.Health = this.Health - 20;  //เลือดลด 10
-            }
-            if(this.mask == 4){ //No mask
-                this.Health = this.Health - 60;  //เลือดลด 0
-            }
-        }
-        if(this.randoms === 3){
-            console.log('seen 3');
-             if(this.mask == 1){ //N95
-                this.Health = this.Health - 25;  //เลือดลด 10
-            }
-            if(this.mask == 2){ //Medical Mask
-                this.Health = this.Health - 40;  //เลือดลด 10
-            }
-            if(this.mask == 3){ //FFP1
-                this.Health = this.Health - 25;  //เลือดลด 10
-            }
-            if(this.mask == 4){ //No mask
-                this.Health = this.Health - 70;  //เลือดลด 0
-            }
-        }
-        if(this.randoms === 4){
-            console.log('seen 4');
-             if(this.mask == 1){ //N95
-                this.Health = this.Health - 10;  //เลือดลด 10
-            }
-            if(this.mask == 2){ //Medical Mask
-                this.Health = this.Health - 10;  //เลือดลด 10
-            }
-            if(this.mask == 3){ //FFP1
-                this.Health = this.Health - 10;  //เลือดลด 10
-            }
-            if(this.mask == 4){ //No mask
-                this.Health = this.Health - 20;  //เลือดลด 0
-            }
-        }
+
         //this.app.root.findByName('stay!').enabled = false;
 
     
         this.textElement.element.text = this.Health; //แสดงจำนวนเลือดปัจจุบัน
+        
         if(this.Health <= 0){
+            app = this.app;
             this.textElement.element.text = 0;
             console.log("END");
             this.health = 500;
@@ -508,15 +513,12 @@ var select = 0;
 TvTest.prototype.initialize = function() {
     this.day = 1;
     this.entity.element.on('mousedown', this.onPress, this);
-//     this.app.on('life', function(select){
-//         console.log("mask:");
-//         console.log(select);
-//         // this.app.fire('enddaymath',select);
-//     },this);
 };
 
 TvTest.prototype.onPress = function(event){
+
     this.day = this.day + 1;
+    this.food = this.food - 1;
     if(event.button === pc.MOUSEBUTTON_LEFT){
         var app = this.app;
         app.fire('cal');
@@ -665,7 +667,6 @@ Mask.prototype.onPress = function(event){
 
 Mask.prototype.select = function(select){
     if(event.button === pc.MOUSEBUTTON_LEFT){
-        // this.app.fire('life', select);
         this.app.fire('enddaymath',select);
         this.app.root.findByName('1').enabled = false;
         this.app.root.findByName('2').enabled = false;
@@ -715,7 +716,7 @@ Mask.prototype.select = function(select){
             if(select === '1'){
                 this.mask1 = this.mask1 + 1;
                 this.textElement.element.text = this.mask1;
-                this.check = 0;
+                this.check = 4;
                 this.app.root.findByName('MedicalButton').enabled = true;
                 this.app.root.findByName('FFP1Button').enabled = true;
                 this.app.root.findByName('FilterButton').enabled = true;
@@ -725,7 +726,7 @@ Mask.prototype.select = function(select){
             if(select === '2'){
                 this.mask2 = this.mask2 + 1;
                 this.textElement.element.text = this.mask2;
-                this.check = 0;
+                this.check = 4;
                 this.app.root.findByName('N95Button').enabled = true;
                 this.app.root.findByName('FFP1Button').enabled = true;
                 this.app.root.findByName('FilterButton').enabled = true;
@@ -735,14 +736,14 @@ Mask.prototype.select = function(select){
             if(select === '3'){
                 this.mask3 = this.mask3 + 1;
                 this.textElement.element.text = this.mask3;
-                this.check = 0;
+                this.check = 4;
                 this.app.root.findByName('N95Button').enabled = true;
                 this.app.root.findByName('MedicalButton').enabled = true;
                 this.app.root.findByName('FilterButton').enabled = true;
             }
         }
         if(select === '4'){
-            this.check = 0;
+            this.check = 4;
             this.app.root.findByName('N95Button').enabled = true;
             this.app.root.findByName('MedicalButton').enabled = true;
             this.app.root.findByName('FFP1Button').enabled = true;
@@ -854,6 +855,8 @@ UnEnabled.prototype.onPress = function() {
         app.root.findByName('Button_for_tablet').enabled = true;
         app.root.findByName('task').enabled = true;
         app.root.findByName('tvendday').enabled = false;
+        app.root.findByName('next').enabled = true;
+        app.root.findByName('nextbutton').enabled = true;
     }
 };
 
@@ -879,4 +882,303 @@ Mainmenu.prototype.update = function(dt){
     
 };
 
+
+// food.js
+var Food = pc.createScript('food');
+Food.attributes.add('textElement', {type : 'entity' });
+var select = Food.attributes.add('task',{type:'string', default: "0", title: "Choose"});
+Food.select = 0;
+
+Food.prototype.initialize = function(){
+    this.task1 = 4;
+    this.min1 = 3;
+    this.max1 = 4;
+    this.check = 0;
+    this.app.mouse.disableContextMenu();
+    var Entity = this.entity;
+    this.app.on('newweek',function(){
+        if(this.task1 !== 0){
+            this.app.fire('fail');
+        }
+        this.task1 = 4;
+        this.min1 = 3;
+        this.max1 = 4;
+    },this);
+    Entity.element.on('mousedown', this.onPress, this);
+    this.app.on('tasked', function(){
+        if(this.check === 1){
+            this.min1 -= 1;
+            this.max1 -= 1;
+            this.app.root.findByName('Jobbutton2').enabled = true;
+            this.app.root.findByName('Jobbutton3').enabled = true;
+        }
+        if(this.check === 2){
+            this.app.root.findByName('Jobbutton1').enabled = true;
+            this.app.root.findByName('Jobbutton3').enabled = true;
+        }
+        if(this.check === 3){
+            this.app.root.findByName('Jobbutton1').enabled = true;
+            this.app.root.findByName('Jobbutton2').enabled = true;
+        }
+        if(this.task1 <= 0){
+            this.app.root.findByName('Jobbutton1').enabled = false;
+            this.app.root.findByName('jobleft').enabled = false;
+        }
+    },this);
+};
+
+Food.prototype.onPress = function(event){
+    if(event.button === pc.MOUSEBUTTON_LEFT){
+        this.select(this.task, function(){
+        
+    });
+    }
+    else if(event.button === pc.MOUSEBUTTON_RIGHT){
+        this.select(this.task, function(){
+        
+    });
+    }
+};
+
+Food.prototype.select = function(select){
+    if(event.button === pc.MOUSEBUTTON_LEFT){
+        //this.app.fire('life', select);
+        console.log(select);
+        this.app.fire('tasked',select);
+        this.app.root.findByName('Job1').enabled = false;
+        this.app.root.findByName('Job2').enabled = false;
+        this.app.root.findByName('Job3').enabled = false;
+        this.app.root.findByName('Job' + select).enabled = true;
+        this.app.root.findByName('tvendday').enabled = true;
+        if(this.task1 > this.min1){
+            if(select === '1'){
+                //ทำงาน
+                this.task1 = this.task1 - 1;
+                this.textElement.element.text = "(" + this.task1 + " Left to do in this week.)";
+                this.check = 1;
+                this.app.root.findByName('Job1').enabled = true;
+                this.app.root.findByName('J2').enabled = false;
+                this.app.root.findByName('J3').enabled = false;
+            }
+        }
+            if(select ==='2'){
+                //ซื้ออาหาร
+                this.check = 2;
+                this.app.root.findByName('Job2').enabled = true;
+                this.app.root.findByName('J1').enabled = false;
+                this.app.root.findByName('J3').enabled = false;
+                this.app.root.findByName('jobleft').enabled = false;
+            }
+            if(select === '3'){
+                //อยู่บ้าน
+                this.check = 3;
+                this.app.root.findByName('Job3').enabled = true;
+                this.app.root.findByName('J1').enabled = false;
+                this.app.root.findByName('J2').enabled = false;
+                this.app.root.findByName('jobleft').enabled = false;
+            }
+    }
+    else if(event.button === pc.MOUSEBUTTON_RIGHT){ // 10 -> 9 -> 10 9+1 = 10
+        if(this.task1 < this.max1){
+            if(select === '1'){
+                this.task1 = this.task1 + 1;
+                this.textElement.element.text = "(" + this.task1 + " Left to do in this week.)";
+                this.check = 0;
+                this.app.root.findByName('J1').enabled = true;
+                this.app.root.findByName('Job1').enabled = false;
+                this.app.root.findByName('J2').enabled = true;
+                this.app.root.findByName('J3').enabled = true;
+            }
+        }
+            if(select === '2'){
+                this.check = 0;
+                this.app.root.findByName('J1').enabled = true;
+                this.app.root.findByName('Job2').enabled = false;
+                this.app.root.findByName('J2').enabled = true;
+                this.app.root.findByName('J3').enabled = true;
+                this.app.root.findByName('jobleft').enabled = true;
+            }
+            if(select === '3'){
+                this.check = 0;
+                this.app.root.findByName('J1').enabled = true;
+                this.app.root.findByName('Job3').enabled = false;
+                this.app.root.findByName('J2').enabled = true;
+                this.app.root.findByName('J3').enabled = true;
+                this.app.root.findByName('jobleft').enabled = true;
+            }
+        this.app.root.findByName(select).enabled = false;
+        this.app.root.findByName('tvendday').enabled = false;
+    }
+};
+
+
+// tast.js
+var Tast = pc.createScript('tast');
+
+var button = Tast.attributes.add("input", {type: "string", default: "0", title: "button"});
+Tast.prototype.initialize = function() {
+    this.entity.element.on('mouseenter', this.onEnter, this);
+    this.entity.element.on('mousedown', this.onPress, this);
+    this.entity.element.on('mouseup', this.onRelease, this);
+    this.entity.element.on('mouseleave', this.onLeave, this);
+    
+    this.entity.element.on('touchstart', this.onPress, this);
+    this.entity.element.on('touchend', this.onRelease, this);
+};
+
+Tast.prototype.onPress = function(event){
+    if(event.button === pc.MOUSEBUTTON_LEFT){
+    this.obj(this.input, function(){
+        
+    });
+    }
+};
+// update code called every frame
+Tast.prototype.update = function(dt) {
+    
+};
+
+
+Tast.prototype.obj = function(obj, callback){
+    this.app.root.findByName(obj).active = false;
+};
+
+
+// open.js
+var Open = pc.createScript('open');
+
+var button = Open.attributes.add("input", {type: "string",title: "step"});
+Open.attributes.add('textElement', {type : 'entity' });
+var step = 0;
+Open.prototype.initialize = function() {
+    this.app.count = 0;
+    this.entity.element.on('mousedown', this.onPress, this);
+    this.entity.element.on('touchstart', this.onPress, this);
+    this.entity.element.on('touchend', this.onRelease, this);
+    this.app.on("nextstep",function(select){
+        this.app.count = select;
+        console.log("after");
+        console.log(this.app.count);
+        if(this.app.count === 0){
+            //ลบปุ่มกลับกันไว้ อันนี้คือแนะนำสถานะการคราวๆ
+            this.app.root.findByName('welcome').enabled = true;
+            this.app.root.findByName('MaskGuide1').enabled = false;
+            this.app.root.findByName('MaskGuide2').enabled = false;
+            this.app.root.findByName('N95guide').enabled = false;
+            this.app.root.findByName('MedicalMaskGuide').enabled = false;
+            this.app.root.findByName('FFP1Guide').enabled = false;
+            this.app.root.findByName('shelfgrow').enabled = false;
+            
+            this.app.root.findByName('backbutton').enabled = false;
+            this.app.root.findByName('back').enabled = false;
+        }
+        if(this.app.count === 1){
+            //ปุ่มกลับ กลับมา แล้วก็แนะนำหน้ากาก
+            this.app.root.findByName('TVtext').enabled = false;
+            this.app.root.findByName('MaskGuide1').enabled = true;
+            this.app.root.findByName('MaskGuide2').enabled = true;
+            this.app.root.findByName('N95guide').enabled = true;
+            this.app.root.findByName('MedicalMaskGuide').enabled = true;
+            this.app.root.findByName('FFP1Guide').enabled = true;
+            this.app.root.findByName('shelfgrow').enabled = true;
+            this.app.root.findByName('welcome').enabled = false;
+            this.app.root.findByName('tvgrow').enabled = false;
+            
+            this.app.root.findByName('backbutton').enabled = true;
+            this.app.root.findByName('back').enabled = true;
+
+        }
+        if(this.app.count === 2){
+            //แนะนำทีวีต่อเลย
+            this.app.root.findByName('MaskGuide1').enabled = false;
+            this.app.root.findByName('MaskGuide2').enabled = false;
+            this.app.root.findByName('N95guide').enabled = false;
+            this.app.root.findByName('MedicalMaskGuide').enabled = false;
+            this.app.root.findByName('FFP1Guide').enabled = false;
+            this.app.root.findByName('taskguide').enabled = false;
+            this.app.root.findByName('TVtext').enabled = true;
+            this.app.root.findByName('tvgrow').enabled = true;
+            this.app.root.findByName('shelfgrow').enabled = false;
+            this.app.root.findByName('taskgrow').enabled = false;
+        }
+        if(this.app.count === 3){
+            //แนะนำ task
+            this.app.root.findByName('TVtext').enabled = false;
+            this.app.root.findByName('taskguide').enabled = true;
+            this.app.root.findByName('taskgrow').enabled = true;
+            this.app.root.findByName('tvgrow').enabled = false;
+            this.app.root.findByName('Button_for_tabletgrow').enabled = false;
+            
+            this.app.root.findByName('landingguide2').enabled = false;
+            this.app.root.findByName('landingguide1').enabled = false;
+        }
+        if(this.app.count === 4){
+            //แนะนำ tablet
+            this.app.root.findByName('landingguide2').enabled = true;
+            this.app.root.findByName('landingguide1').enabled = true;
+            this.app.root.findByName('Button_for_tabletgrow').enabled = true;
+            this.app.root.findByName('taskguide').enabled = false;
+            this.app.root.findByName('taskgrow').enabled = false;
+        }
+        if(this.app.count === 5){
+            //แนะนำอาหาร ไม่ก็ปิดการแนะนำ
+            this.app.root.findByName('N95Button').enabled = true;
+            this.app.root.findByName('MedicalButton').enabled = true;
+            this.app.root.findByName('FFP1Button').enabled = true;
+            this.app.root.findByName('FilterButton').enabled = true;
+            this.app.root.findByName('Button_for_tablet').enabled = true;
+            this.app.root.findByName('task').enabled = true;
+            this.app.root.findByName('tvendday').enabled = false;
+            this.app.root.findByName('next').enabled = false;
+            this.app.root.findByName('nextbutton').enabled = false;
+            this.app.root.findByName('backbutton').enabled = false;
+            this.app.root.findByName('back').enabled = false;
+            this.app.root.findByName('landingguide2').enabled = false;
+            this.app.root.findByName('landingguide1').enabled = false;
+            this.app.root.findByName('Button_for_tabletgrow').enabled = false;
+        }
+    },this);
+};
+
+Open.prototype.onPress = function(event){
+    if(event.button === pc.MOUSEBUTTON_LEFT){
+        if(this.input === 'next'){
+            console.log('next');
+            this.app.count = this.app.count + 1;
+            console.log(this.app.count);
+            this.app.fire("nextstep",this.app.count);
+            if(this.app.count === 4){
+                this.textElement.element.text = "let go";
+            }
+        }
+          if(this.input === 'none'){
+            this.app.count = this.app.count + 1;
+            this.app.count = this.app.count - 1;
+        }
+        if(this.input === 'back'){
+            console.log('back');
+            this.app.count = this.app.count - 1;
+            console.log(this.app.count);
+            this.app.fire("nextstep",this.app.count);
+            if(this.app.count === 3){
+                this.textElement.element.text = "next";
+            }
+            
+        }
+    }
+     
+};
+
+// Open.prototype.obj = function(obj, callback){
+//     this.app.root.findByName(obj).enabled = true;
+// };
+// Open.prototype.obj2 = function(obj, callback){
+//     this.app.root.findByName(obj).enabled = false;
+// };
+// Open.prototype.obj3 = function(obj, callback){
+//     this.app.root.findByName(obj).enabled = true;
+// };
+// Open.prototype.obj4 = function(obj, callback){
+//     this.app.root.findByName(obj).enabled = false;
+// };
 

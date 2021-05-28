@@ -11,7 +11,6 @@
   src: url(FC-Minimal/FC_Minimal_Regular.ttf);
 
 }
-
 *{
   font-family: 'Sarabun', sans-serif;
 
@@ -57,7 +56,7 @@ h1 {
 }
 
 figcaption,
-figure,
+figure
 main {
   display: block;
 }
@@ -341,14 +340,15 @@ nav#dot-nav.red a:first-child {
   flex-direction: row;
   z-index: 999;
 	position: relative;
-	padding: 1rem 3rem;
-	font-size: 1rem;
+	padding: 1rem 2em;
+	font-size: 1.3rem;
 	color: var(--inv);
 	letter-spacing: 0.3rem;
 	text-transform: uppercase;
 	transition: all 500ms cubic-bezier(0.77, 0, 0.175, 1);
 	cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
 	user-select: none;
+  font-weight: bold;
 }
 
 .btn a{
@@ -446,30 +446,14 @@ nav#dot-nav.red a:first-child {
   width: 40%;
   height: 50%;
   z-index: 2;
-  animation: gogo 15s infinite alternate-reverse;
+  animation: gogo 35s linear infinite;
   transition: 15s;
 }@keyframes gogo{
-  0%{transform: translateX(1500px) translateY(2px);}
-  100%{transform: translateX(-10px) translateY(2px);}
-}
-.smokel2{
-  width: 20%;
- height: 25%;
- position: absolute;
- bottom: -5%;
- left:-5%;
- transform: rotate(230deg);
- animation:smokee 2s infinite alternate;
- z-index: 2;
- animation: smokee 15s infinite alternate-reverse;
-  transition: 15s;
-}
-@keyframes smokee{
- 0%{opacity: 20%;transform: translateX(1500px) translateY(2px) rotate(230deg);}
- 25%{opacity: 25%;}
- 50%{opacity: 50%;}
- 75%{opacity: 80%;}
- 100%{opacity: 100%;transform: translateX(-10px) translateY(2px) rotate(230deg) scale(1.1);}
+  0%{left: -40%;}
+  48%{transform: rotateY(0deg);}
+  50%{left: 100%; transform: rotateY(180deg);}
+  98%{transform: rotateY(180deg);}
+  100%{left: -40%; transform: rotateY(0deg);}
 }
 
 .goon{
@@ -1315,7 +1299,6 @@ cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
 }
 .location-page5:hover{
   transform: scale(1.3);
-  cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
 }
 .lo_yellow{
   width: 10%;
@@ -1435,127 +1418,7 @@ cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
   background-image:linear-gradient(#cab5f0,#689de1,#689de1,#e3f9fd);
   position: relative;
   overflow: hidden;
-}
-@keyframes color {
-        0% {
-            background-color: #14c7de;
-        }
-
-        5% {
-            background-color: rgb(54, 204, 209);
-        }
-
-        10% {
-            background-color: rgb(53, 162, 235);
-        }
-
-        15% {
-            background-color: rgb(15, 96, 218);
-        }
-
-        20% {
-            background-color: rgb(42, 103, 196);
-        }
-
-        25% {
-            background-color: rgb(53, 162, 235);
-        }
-
-        30% {
-            background-color: rgb(54, 204, 209);
-        }
-    }
-
-    @keyframes color1 {
-        0% {
-            background-color: #19b092;
-        }
-
-        5% {
-            background-color: rgb(8, 243, 165);
-        }
-
-        10% {
-            background-color: rgb(9, 136, 115);
-        }
-
-        15% {
-            background-color: rgb(14, 161, 137);
-        }
-
-        20% {
-            background-color: rgb(9, 136, 115);
-        }
-
-        25% {
-            background-color: rgb(8, 243, 165);
-        }
-
-        30% {
-            background-color: #19b092;
-        }
-    }
-
-    @keyframes color2 {
-        0% {
-            background-color: #e79278;
-        }
-
-        5% {
-            background-color: rgb(228, 112, 35);
-        }
-
-        10% {
-            background-color: rgb(212, 77, 14);
-        }
-
-        15% {
-            background-color: rgb(223, 70, 43);
-        }
-
-        20% {
-            background-color: rgb(212, 77, 14);
-        }
-
-        25% {
-            background-color: rgb(228, 112, 35);
-        }
-
-        30% {
-            background-color: #e79278;
-        }
-    }
-
-    @keyframes color3 {
-        0% {
-            background-color: #C7EA46;
-        }
-
-        5% {
-            background-color: rgb(243, 239, 26);
-        }
-
-        10% {
-            background-color: rgb(158, 156, 40);
-        }
-
-        15% {
-            background-color: rgb(185, 197, 10);
-        }
-
-        20% {
-            background-color: rgb(199, 196, 38);
-        }
-
-        25% {
-            background-color: rgb(243, 239, 26);
-        }
-
-        30% {
-            background-color: #C7EA46;
-        }
-    }
-
+}   
 .pic{
   display: flex;
   justify-content: center;
@@ -1571,16 +1434,17 @@ cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
   background-size: contain;
 }
 .p1 {
-  
-  font-size: 2vw;
-  color:#fff;
-  font-family: 'Mitr', sans-serif;
-}
-.p2 {
-  
-  font-size: 2vw;
-  color:#000;
-}
+
+        font-size: 1.7vw;
+        color: #fff;
+        font-family: 'Mitr', sans-serif;
+    }
+
+    .p2 {
+
+        font-size: 2vw;
+        color: #000;
+    }
 .pot{
   width: 15%;
   height: 25%;
@@ -1670,7 +1534,7 @@ cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
 .context{
   top:-7.5%;
   left: 30%;
-  color: #eee;
+  color: #000;
   font-size: 1.1vw;
   font-weight: 900;
   text-align: center;
@@ -1678,11 +1542,11 @@ cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
 .context1{
   top:5%;
   right: 13%;
-  color: #eee;
+  color: #000;
   font-size: 1.1vw;
   font-weight: 900;
   text-align: center;
-  border: 5px solid rgb(255, 252, 252);
+  border: 5px solid rgb(19, 18, 18);
   height: 15%;
   width: 55%;
   padding: 10px;
@@ -1691,7 +1555,7 @@ cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
 .context2{
   top:-7.5%;
   left: 63%;
-  color: #eee;
+  color: #000;
   font-size: 1.1vw;
   font-weight: 900;
   text-align: center;
@@ -1699,7 +1563,7 @@ cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
 .context3{
   top:4%;
   right: 13%;
-  color: #eee;
+  color: #000;
   font-size: 1.1vw;
   font-weight: 200;
   text-align: center;
@@ -1784,54 +1648,42 @@ cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
         left: 75%;
         box-shadow: 0px 0px 5px 5px #BABABA;
     }
-
-    #line {
+#line {
         position: absolute;
         width: 5%;
         border-radius: 1em;
         background: #14c7de;
         left: 38%;
         z-index: 100;
-        animation-name: color;
-        animation-duration: 50s;
-        animation-iteration-count: infinite;
     }
 
     #line1 {
         position: absolute;
         width: 5%;
         border-radius: 1em;
-        background: #19b092;
+        background: #C7EA46;
         left: 50%;
         z-index: 100;
-        animation-name: color1;
-        animation-duration: 50s;
-        animation-iteration-count: infinite;
     }
 
     #line2 {
         position: absolute;
         width: 5%;
         border-radius: 1em;
-        background: #ef5f33;
+        background: #19b092;
         left: 62%;
         z-index: 100;
-        animation-name: color2;
-        animation-duration: 50s;
-        animation-iteration-count: infinite;
     }
 
     #line3 {
         position: absolute;
         width: 5%;
         border-radius: 1em;
-        background: #C7EA46;
+        background: #ef5f33;
         left: 74%;
         z-index: 100;
-        animation-name: color3;
-        animation-duration: 50s;
-        animation-iteration-count: infinite;
     }
+    
 
 .image1 {
   width: 26%;
@@ -1997,7 +1849,7 @@ p {
 
 .img8:hover{
   transform: scale(1.2);
-  background-color: rgb(243, 204, 97);
+  background-color: rgb(73, 170, 86);
   cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
 }
 .imge9 {
@@ -2037,8 +1889,46 @@ p {
   right: 25%;
 }.img10:hover{
   transform: scale(1.2);
-  background-color: rgb(73, 170, 86);
+  background-color: rgb(243, 204, 97);
   cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
+}
+
+
+#thai1{
+  font-size: 1.2vw;
+  position: absolute;
+  top: 71.5%;
+  left: 28.8%;
+  color: white;
+  font-weight: bolder;
+  z-index: 10;
+}
+#thai2{
+  font-size: 1.2vw;
+  position: absolute;
+  top: 71.5%;
+  right: 13.5%;
+  color: white;
+  font-weight: bolder;
+  z-index: 10;
+}
+#who1{
+  font-size: 1.2vw;
+  position: absolute;
+  top: 71.5%;
+  left: 10.5%;
+  color: white;
+  font-weight: bolder;
+  z-index: 10;
+}
+#who2{
+  font-size: 1.2vw;
+  position: absolute;
+  top: 71.5%;
+  right: 25%;
+  color: white;
+  font-weight: bolder;
+  z-index: 10;
 }
 #orage {
   border-radius: 15%;
@@ -2053,8 +1943,8 @@ p {
   border-radius: 15%;
   background: #aeb42b;
   position: absolute;
-  top: 1%;
-  right: 22.5%;
+  top: 6%;
+  right: 25%;
   width: 2%;
   height: 4%;
 }
@@ -2062,8 +1952,8 @@ p {
   border-radius: 15%;
   background: #ffb300;
   position: absolute;
-  top: 6%;
-  right: 25%;
+  top: 1%;
+  right: 22.5%;
   width: 2%;
   height: 4%;
 }
@@ -2080,7 +1970,7 @@ p {
   font-size: 1.1vw;
   position: absolute;
   top: 3%;
-  right: 10%;
+  right: 9.8%;
   color: #fff;
   font-weight: bolder;
 }
@@ -2088,7 +1978,7 @@ p {
   font-size: 1.1vw;
   position: absolute;
   top: 8%;
-  right: 15.1%;
+  right: 15.3%;
   color: #fff;
   font-weight: bolder;
 }
@@ -2344,28 +2234,7 @@ cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
 
   position: absolute;
 }
-.passage2:hover{
-  cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
-  box-shadow: 0px 0px 30px #50C785 , 0px 0px 30px #50C785;
-   z-index: 200;
-}
-.passage2{
-  position:absolute;
-  top:62%;
-  left: 56.5%;
-  text-align: center;
-  padding:0.5em;
-   width: 7em;
-  border-radius: 30px;
-  background: #54BD54;
-  border: none;
-  color:white;
-  font-size: 1.5vw;
-  font-family: 'Mitr', sans-serif;
-  box-shadow: 0px 0px 10px #50C785;
-  cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
-  z-index: 200;
-}
+
 .cloud1{
    width: 100%;
   height: 80%;
@@ -2841,4 +2710,62 @@ cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
 }
 .a_cloud{
   position: absolute;
+  opacity: 85%;
+  filter: brightness(1.35);
+}@keyframes cloudmove{
+  0%{transform: translateX(30px) translateY(5px);}
+  100%{transform: translateX(10px) translateY(5px);}
+}
+#page11{
+  background:#71c4a3;
+  position: relative;
+  overflow: hidden;
+  height: 40vh;
+}
+#textt2{
+  position: absolute;
+  border-radius: 30px;
+  top: 9%;
+  left:20%;
+  font-size: 2vw;
+  font-weight: bold;
+  color: rgb(34, 34, 34);
+  text-align: center;
+  background-color: rgb(245, 244, 244);
+  border: 5px solid rgb(77, 76, 76);
+  padding: 25px;
+  padding-bottom: 30px;
+  opacity: 85%;
+  z-index: 100;
+  font-family: 'Mitr', sans-serif;
+}
+.passage2:hover{
+  cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
+  box-shadow: 0px 0px 30px #50C785 , 0px 0px 30px #3b58d6;
+   z-index: 200;
+}
+.passage2{
+  position:absolute;
+  top:71%;
+  left: 31%;
+  text-align: center;
+  padding:0.5em;
+   width: 7em;
+  border-radius: 10px;
+  background: #194a72;
+  border: none;
+  color:white;
+  font-size:1.8vw;
+  font-family: 'Mitr', sans-serif;
+  box-shadow: 0px 0px 10px #5bcce9;
+  cursor: url(https://cur.cursors-4u.net/games/gam-4/gam308.cur), auto !important;
+  z-index: 200;
+}
+.img_b{
+  position:absolute;
+  bottom: 0;
+  right: -6%;
+  width: 43%;
+  height: 55%;
+  opacity: 70%;
 }
